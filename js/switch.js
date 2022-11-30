@@ -1,4 +1,4 @@
-const option = 10;
+const option = 2;
 let message;
 
 switch (option) {
