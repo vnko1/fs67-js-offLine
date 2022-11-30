@@ -70,11 +70,15 @@ if (totalSpent >= 100 && totalSpent < 1000) {
   console.log('Нет скидки');
 }
 
-payement = payement - payement * discount;
+// payement = payement - payement * discount;
+
+payement -= payement * discount;
 
 console.log(
   `Оформляем заказ на сумму ${payement} со скидкой ${discount * 100}%.`,
 );
+
+totalSpent += payement;
 
 // if (totalSpent >= 100 && totalSpent < 1000) {
 //   discount = 0.02;
