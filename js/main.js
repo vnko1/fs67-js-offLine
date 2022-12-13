@@ -20,10 +20,17 @@ const cart = {
     return this.items;
   },
   add(product) {
-    this.items.push(product);
-    for (let i = 0; i < this.items.length; i++) {
-      this.items[i].quantity = 1;
+    for (const item of this.items) {
+      if (item.name === product.name) {
+        item.quantity += 1;
+        return;
+      }
     }
+    const newProduct = {
+      ...product,
+      quantity: 1,
+    };
+    this.items.push(newProduct);
   },
   remove(productName) {
     for (let i = 0; i < this.items.length; i++) {
@@ -81,10 +88,10 @@ console.table(cart.getItems());
 // cart.clear();
 // console.table(cart.getItems());
 
-// cart.increaseQuantity('🍎');
-// console.table(cart.getItems());
+cart.increaseQuantity('🍎');
+console.table(cart.getItems());
 
 // cart.decreaseQuantity('🍎');
 // console.table(cart.getItems());
 
-// console.log('Total: ', cart.countTotalPrice());
+console.log('Total: ', cart.countTotalPrice());
