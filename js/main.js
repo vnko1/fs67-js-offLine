@@ -21,7 +21,6 @@ const cart = {
   },
   add(product) {
     this.items.push(product);
-
     for (let i = 0; i < this.items.length; i++) {
       this.items[i].quantity = 1;
     }
@@ -70,7 +69,7 @@ cart.add({ name: '🍋', price: 60 });
 cart.add({ name: '🍋', price: 60 });
 cart.add({ name: '🍓', price: 110 });
 
-// console.table(cart.getItems());
+console.table(cart.getItems());
 
 // console.log(cart.countTotalPrice());
 // cart.clear();
