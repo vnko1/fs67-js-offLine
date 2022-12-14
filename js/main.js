@@ -4,7 +4,8 @@ const cart = {
     return this.items;
   },
   add(product) {
-    for (const item of this.items) {
+    const { items } = this;
+    for (const item of items) {
       if (item.name === product.name) {
         item.quantity += 1;
         return;
@@ -28,12 +29,13 @@ const cart = {
   },
   countTotalPrice() {
     let totalPrice = 0;
-    for (const item of this.items) {
-      if (item.quantity > 1) {
-        totalPrice += item.price * item.quantity;
+    const { items } = this;
+    for (const { price, quantity } of items) {
+      if (quantity > 1) {
+        totalPrice += price * quantity;
         continue;
       }
-      totalPrice += item.price;
+      totalPrice += price;
     }
     return totalPrice;
   },
@@ -81,4 +83,4 @@ console.table(cart.getItems());
 // cart.decreaseQuantity('🍎');
 // console.table(cart.getItems());
 
-// console.log('Total: ', cart.countTotalPrice());
+console.log('Total: ', cart.countTotalPrice());
