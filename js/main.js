@@ -31,11 +31,7 @@ const cart = {
     let totalPrice = 0;
     const { items } = this;
     for (const { price, quantity } of items) {
-      if (quantity > 1) {
-        totalPrice += price * quantity;
-        continue;
-      }
-      totalPrice += price;
+      totalPrice += price * quantity;
     }
     return totalPrice;
   },
