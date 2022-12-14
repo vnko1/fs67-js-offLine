@@ -38,14 +38,16 @@ const cart = {
     return totalPrice;
   },
   increaseQuantity(productName) {
-    for (const item of this.items) {
+    const { items } = this;
+    for (const item of items) {
       if (item.name === productName) {
         item.quantity += 1;
       }
     }
   },
   decreaseQuantity(productName) {
-    for (const item of this.items) {
+    const { items } = this;
+    for (const item of items) {
       if (item.name === productName) {
         item.quantity -= 1;
       }
@@ -73,9 +75,10 @@ console.table(cart.getItems());
 // console.table(cart.getItems());
 
 cart.increaseQuantity('🍎');
+cart.increaseQuantity('🍎');
 console.table(cart.getItems());
 
 // cart.decreaseQuantity('🍎');
 // console.table(cart.getItems());
 
-console.log('Total: ', cart.countTotalPrice());
+// console.log('Total: ', cart.countTotalPrice());
