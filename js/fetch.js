@@ -25,6 +25,7 @@ export default class FetchNews {
     this.BASE_URL = 'https://newsapi.org/v2/everything?';
     this.querySearch = '';
     this.page = 1;
+    this.totalPages = null;
     this.options = {
       headers: { Authorization: '02bb415c0697483b9ce3d12a7a619db3' },
     };

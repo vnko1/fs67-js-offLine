@@ -29,6 +29,7 @@ function fetching() {
   return fetchNews
     .fetchData()
     .then(data => {
+      fetchNews.totalPages = data.totalResults;
       return data.articles.reduce((acc, markup) => {
         acc += createMarkUp(markup);
         return acc;
