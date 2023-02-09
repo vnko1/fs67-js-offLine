@@ -30,6 +30,10 @@ function fetching() {
     .fetchData()
     .then(data => {
       fetchNews.totalPages = data.totalResults;
+      if (fetchNews.getTotalEl() > fetchNews.totalPages) {
+        alert('введіть новий запит');
+      }
+
       return data.articles.reduce((acc, markup) => {
         acc += createMarkUp(markup);
         return acc;

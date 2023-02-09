@@ -68,4 +68,8 @@ export default class FetchNews {
   pageReset() {
     this.page = 1;
   }
+
+  getTotalEl() {
+    return this.params.get('pageSize') * this.params.get('page');
+  }
 }
