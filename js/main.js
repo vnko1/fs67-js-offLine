@@ -1,13 +1,33 @@
-import { fetchData } from './fetch.js';
+// import { fetchData } from './fetch.js';
+import FetchNews from './fetch.js';
 const formEl = document.querySelector('.js-search-form');
 const articles = document.querySelector('.js-articles-container');
-const btn = document.querySelector('.btn-primary');
+const btn = document.querySelector('[data-set]');
+const fetchNews = new FetchNews();
+
 formEl.addEventListener('submit', handleOnSubmit);
+btn.addEventListener('click', handleOnClick);
 
 function handleOnSubmit(e) {
   e.preventDefault();
+  fetchNews.pageReset();
+  fetchNews.updatePageParam();
+  articles.innerHTML = '';
   const { query } = e.currentTarget.elements;
-  fetchData(query.value)
+  fetchNews.query = query.value;
+  fetching();
+}
+
+function handleOnClick() {
+  fetchNews.incrementPage();
+  fetchNews.updatePageParam();
+  btn.disabled = true;
+  fetching().finally(() => (btn.disabled = false));
+}
+
+function fetching() {
+  return fetchNews
+    .fetchData()
     .then(data => {
       return data.articles.reduce((acc, markup) => {
         acc += createMarkUp(markup);
@@ -15,9 +35,7 @@ function handleOnSubmit(e) {
       }, ``);
     })
     .then(updateHtml)
-    .then(() => {
-      btn.textContent = 'Искать еще';
-    });
+    .catch(alert);
 }
 
 function createMarkUp({ urlToImage, title, author, description, url }) {
@@ -33,3 +51,15 @@ function createMarkUp({ urlToImage, title, author, description, url }) {
 function updateHtml(markup) {
   articles.insertAdjacentHTML('beforeend', markup);
 }
+
+// fetchData(query.value)
+//   .then(data => {
+//     return data.articles.reduce((acc, markup) => {
+//       acc += createMarkUp(markup);
+//       return acc;
+//     }, ``);
+//   })
+//   .then(updateHtml)
+//   .then(() => {
+//     btn.textContent = 'Искать еще';
+//   });
